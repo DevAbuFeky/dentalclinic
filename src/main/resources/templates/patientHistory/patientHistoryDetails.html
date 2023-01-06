@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments.html :: head"></head>
+<body>
+    <div id="wrapper">
+        <header th:insert="fragments.html :: header"></header>
+        <div th:insert="fragments.html :: nav"></div>
+        <!-- /. NAV SIDE  -->
+        <div id="content-wrapper" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div th:if="${message != null}"
+                 class="alert alert-success text-center">[[${message}]]</div>
+            <div>
+                <ol class="breadcrumb">
+                    <li> <a th:href="@{/product/productsList}"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></a>
+                    <li> <a th:href="@{/product/updateProduct?id=}+${book.id}" class="fa fa-edit fa-2x"></a></li>
+                </ol>
+            </div>
+            <!--                <div class="row">-->
+            <!--                    <div class="col-md-12">-->
+            <!--                        <h2>Details</h2>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-md-9">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Patient History Details
+                        </div>
+                        <div class="panel-body">
+                            <div class="preview col-md-6">
+                            </div>
+                            <div class="details col-md-6">
+                                <h3 class="product-title" th:text="${book.tittle}"></h3>
+                                <p><strong>Publisher: </strong><span th:text="${book.publisher}"></span></p>
+                                <p><strong>Category: </strong><span th:text="${book.category.name}"></span></p>
+                                <p><strong>Publication Date: </strong><span th:text="${book.publicationDate}"></span></p>
+                                <p class="product-description"><Strong>Description: </Strong><span th:text="${book.description}"></span></p>
+                                <br/>
+                                <p><strong>List Price: </strong><span th:text="${book.listPrice}"></span></p>
+                                <p><strong>Our Price: </strong><span th:text="${book.ourPrice}"></span></p>
+                                <p><strong>Number in Stock: </strong><span th:text="${book.inStockNumber}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+            <!-- End  Hover Rows  -->
+        </div>
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTTOM TO REDUCE THE LOAD TIME-->
+    <div th:insert="fragments.html :: script"></div>
+</body>
+
+</html>

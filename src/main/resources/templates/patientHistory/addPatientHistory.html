@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
+<head th:insert="fragments.html :: head"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:insert="fragments.html :: header"></header>
+<!-- ======= Sidebar ======= -->
+<div th:insert="fragments.html :: nav"></div>
+
+<!-- Content -->
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Add Patient History</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/patientHistoryList}">Patient History</a></li>
+                <li class="breadcrumb-item active">Add Patient History</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <!-- General Form Elements -->
+                        <form th:action="@{/addPatientHistory}" method="post" th:object="${patientHistory}">
+                            <input type="hidden" name="id"  th:field="*{id}">
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Patient Name</label>
+                                    <input type="text" class="form-control" th:field="*{patientName}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label>BirthDate</label>
+                                    <input type="date" class="form-control" id="patientBirthday"
+                                           name="patientBirthday" th:value="${patientHistory.patientBirthday}" style="width: 25%;"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-select" th:field="*{patientGender}">
+                                    <option th:value="'M'" th:text="Male"></option>
+                                    <option th:value="'F'" th:text="Female"></option>
+                                </select>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Mobile Number</label>
+                                    <input type="text" class="form-control" th:field="*{patientMobile}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Job</label>
+                                    <input type="text" class="form-control" th:field="*{patientJob}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label>Visit Date</label>
+                                    <input type="date" class="form-control" id="visitDate"
+                                           name="visitDate" th:value="${patientHistory.visitDate}" style="width: 25%;"/>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Allergic from Drug</label>
+                                    <input type="text" class="form-control" th:field="*{allergicToQuestions}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Why..?</label>
+                                    <input type="text" class="form-control" th:field="*{allergicToWhyQuestions}" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label>Follow-Up Date</label>
+                                    <input type="date" class="form-control" id="followUpDate"
+                                           name="followUpDate" th:value="${patientHistory.followUpDate}" style="width: 25%;"/>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">File Number</label>
+                                    <input type="text" class="form-control" th:field="*{fileNumber}" required>
+                                </div>
+                            </div>
+                            <fieldset class="row mb-3">
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 col-form-label">Status</label>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="active" th:checked="checked">
+                                            Active
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" value="false" type="radio" name="active">
+                                            DisActive
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" class="btn btn-secondary" th:href="@{/patientHistoryList}">Cancel</a>
+                            </div>
+
+                        </form><!-- End General Form Elements -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:insert="fragments.html :: script"></div>
+</body>
+
+</html>

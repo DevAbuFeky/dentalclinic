@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
+<head th:insert="fragments.html :: head"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:insert="fragments.html :: header"></header>
+<!-- ======= Sidebar ======= -->
+<div th:insert="fragments.html :: nav"></div>
+
+<!-- Content -->
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Update User</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/users}">Users</a></li>
+                <li class="breadcrumb-item active">Update User</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <!-- No Labels Form -->
+                        <form class="row g-3" th:action="@{/updateUser}" method="post" th:object="${user}">
+                            <input type="hidden" name="id"  th:field="*{id}">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name">
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control" th:field="*{userName}" placeholder="Username">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="email" class="form-control" th:field="*{email}" placeholder="Email">
+                            </div>
+
+<!--                            <fieldset class="row mb-3">-->
+<!--                                <div class="col-sm-10">-->
+<!--                                    <label class="col-sm-2 col-form-label">Status</label>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input class="form-check-input" type="radio" id="active1" name="active"-->
+<!--                                               checked="checked">-->
+<!--                                        <label class="form-check-label" for="active1">-->
+<!--                                            Active-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input class="form-check-input" value="false" type="radio" name="active" id="active2">-->
+<!--                                        <label class="form-check-label" for="active2">-->
+<!--                                            DisActive-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </fieldset>-->
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" class="btn btn-secondary" th:href="@{/users}">Cancel</a>
+                            </div>
+                        </form><!-- End No Labels Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:insert="fragments.html :: script"></div>
+</body>
+
+</html>

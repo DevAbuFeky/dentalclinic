@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments.html :: head"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:insert="fragments.html :: header"></header>
+<!-- ======= Sidebar ======= -->
+<div th:insert="fragments.html :: nav"></div>
+<main id="main" class="main">
+
+    <div th:if="${message != null}"
+         class="alert alert-success text-center">[[${message}]]</div>
+
+    <div class="pagetitle">
+        <h1>PatientHistory List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item active">PatientHistory List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Content columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <!-- Users List -->
+                    <div class="col-12">
+                        <a class="btn btn-primary" th:href="@{/addPatientHistory}">
+                            New Patient History
+                        </a>
+                        <div class="card recent-sales overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Patient History</h5>
+                                <table class="table table-borderless datatable">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Patient Name</th>
+                                        <th scope="col">Patient BirthDate</th>
+                                        <th scope="col">Visit Date</th>
+                                        <th scope="col">Follow-Up Date</th>
+                                        <th scope="col">File Number</th>
+                                        <th scope="col">Active</th>
+                                        <th scope="col">##</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="patientHistory, iStat : ${patientHistoryList}">
+                                        <th name="id" th:text="${patientHistory.id}"></th>
+                                        <td th:text="${patientHistory.patientName}" class="text-primary"></td>
+                                        <td th:text="${patientHistory.patientBirthday}" class="text-primary"></td>
+                                        <td th:text="${patientHistory.visitDate}" class="text-primary"></td>
+                                        <td th:text="${patientHistory.followUpDate}" class="text-primary"></td>
+                                        <td th:text="${patientHistory.fileNumber}" class="text-primary"></td>
+                                        <td>
+                                            <span th:if="${patientHistory.active == true}" class="badge bg-success">Active</span>
+                                            <span th:if="${patientHistory.active == false}" class="badge bg-danger">DisActive</span>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/removePatientHistory/{id}(id=${patientHistory.id})}"
+                                               th:onclick="if (!(true('Are you sure about delete it?!'))) return false">
+                                                <span class=" ri-delete-bin-5-fill"></span></a>
+                                            <a href="" th:href="@{/updatePatientHistory?id=}+${patientHistory.id}">
+                                                <span class="ri-edit-box-line"></span></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- End Recent Sales -->
+
+                </div>
+            </div><!-- End side columns -->
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Feky App</span></strong>. All Rights Reserved
+    </div>
+
+    <div class="credits">
+        Designed by <a href="#">Feky App</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div th:insert="fragments.html :: script"></div>
+</body>
+
+</html>

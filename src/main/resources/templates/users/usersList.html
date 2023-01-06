@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments.html :: head"></head>
+<body>
+<!-- ======= Header ======= -->
+<header th:insert="fragments.html :: header"></header>
+<!-- ======= Sidebar ======= -->
+<div th:insert="fragments.html :: nav"></div>
+
+<main id="main" class="main">
+
+    <div th:if="${message != null}"
+         class="alert alert-success text-center">[[${message}]]</div>
+
+    <div class="pagetitle">
+        <h1>Users List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item active">Users List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Content columns -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <!-- Users List -->
+                    <div class="col-12">
+                        <a class="btn btn-primary" th:href="@{/createUser}">
+                            New User
+                        </a>
+                        <div class="card recent-sales overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Users</h5>
+                                <table class="table table-borderless datatable">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Active</th>
+                                        <th scope="col">##</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user, iStat : ${usersList}">
+                                        <th name="id" th:text="${user.id}"></th>
+                                        <td th:text="${user.firstName}" class="text-primary"></td>
+                                        <td th:text="${user.lastName}" class="text-primary"></td>
+                                        <td th:text="${user.userName}" class="text-primary"></td>
+                                        <td th:text="${user.email}" class="text-primary"></td>
+                                        <td>
+                                            <span th:if="${user.enabled == true}" class="badge bg-success">Available</span>
+                                            <span th:if="${user.enabled == false}" class="badge bg-danger">DisActive</span>
+                                        </td>
+                                        <td><a href="" th:href="@{/updateUser/{id}(id=${user.id})}">
+                                            <span class="ri-edit-box-line"></span></a>
+                                            <a href="" th:href="@{/delete/{id}(id=${user.id})}">
+                                            <span class=" ri-delete-bin-5-fill"></span></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- End Recent Sales -->
+
+                </div>
+            </div><!-- End side columns -->
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Feky App</span></strong>. All Rights Reserved
+    </div>
+
+    <div class="credits">
+        Designed by <a href="#">Feky App</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div th:insert="fragments.html :: script"></div>
+</body>
+
+</html>

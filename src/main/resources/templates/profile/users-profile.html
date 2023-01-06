@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="fragments.html :: head"></head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:insert="fragments.html :: header"></header>
+<!-- ======= Sidebar ======= -->
+<div th:insert="fragments.html :: nav"></div>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Profile</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+          <li class="breadcrumb-item">Users</li>
+          <li class="breadcrumb-item active">Profile</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+              <img th:src="@{/img/i3.png}" alt="Profile" class="rounded-circle">
+              <h2 th:text="${user.firstName +' '+ user.lastName}"></h2>
+              <div class="social-links mt-2">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item" th:classappend="${classActiveEdit}? 'in active'">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview"
+                          th:classappend="${classActiveEdit}? 'in active'">Overview</button>
+                </li>
+
+                <li class="nav-item" th:classappend="${classActiveEdit}? 'in active'">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <h5 class="card-title">Profile Details</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-9 col-md-8" th:text="${user.firstName +' '+ user.lastName}"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Address</div>
+                    <div class="col-lg-9 col-md-8" th:text="${user.address}"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Phone</div>
+                    <div class="col-lg-9 col-md-8" th:text="${user.phone}"></div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8" th:text="${user.email}"></div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit" th:classappend="${classActiveEdit}? 'in active'">
+
+                  <div class="alert alert-danger" th:if="${incorrectPassword}">
+                    <strong>Incorrect Password!</strong> Pleae enter the correct
+                    password for the current user.
+                  </div>
+
+                  <div class="alert alert-succss" th:if="${updateSuccess}">
+                    <strong>Update Success!</strong>
+                  </div>
+                  <!-- Profile Edit Form -->
+                  <form th:action="@{/updateUserInfo}" method="post">
+                    <input type="hidden" name="id" th:value="${user.id}"/>
+
+                    <div class="row mb-3">
+                      <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="firstName" type="text" class="form-control" id="firstName" th:value="${user.firstName}">
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="lastName" type="text" class="form-control" id="lastName" th:value="${user.lastName}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="phone" type="text" class="form-control" id="Phone" th:value="${user.phone}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="email" type="email" class="form-control" id="Email" th:value="${user.email}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="userName" class="col-md-4 col-lg-3 col-form-label">Username</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="userName" type="text" class="form-control" id="userName" th:value="${user.userName}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="address" type="text" class="form-control" id="Address" th:value="${user.address}">
+                      </div>
+                    </div>
+<!--                    Update Password Section-->
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="password" type="password" class="form-control" id="currentPassword" th:value="${currentPassword}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="txtNewPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="newPassword" type="password" class="form-control" id="txtNewPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="txtConfirmPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="txtConfirmPassword" type="password" class="form-control" id="txtConfirmPassword">
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Feky App</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">Feky App</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <div th:insert="fragments.html :: script"></div>
+
+</body>
+
+</html>
