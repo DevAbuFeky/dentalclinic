@@ -1,8 +1,10 @@
 package com.dentaclinic.controller;
 
 import com.dentaclinic.model.patient.PatientHistory;
+import com.dentaclinic.model.patient.PatientHistoryQuestions;
 import com.dentaclinic.repository.patient.PatientHistoryQuestionsRepository;
 import com.dentaclinic.repository.patient.PatientHistoryRepository;
+import com.dentaclinic.services.patient.PatientHistoryQuestionsServices;
 import com.dentaclinic.services.patient.PatientHistoryServices;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class PatientHistoryController {
     private final PatientHistoryServices patientHistoryServices;
     private final PatientHistoryRepository patientHistoryRepository;
     private final PatientHistoryQuestionsRepository patientHistoryQuestionsRepository;
+    private final PatientHistoryQuestionsServices patientHistoryQuestionsServices;
 
     @RequestMapping(value = "/addPatientHistory", method = RequestMethod.GET)
     public String addPatientHistory(Model model){

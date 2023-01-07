@@ -35,7 +35,4 @@ public class PatientHistory {
     private String fileNumber;
     private Boolean active;
 
-//    @OneToMany
-//    @JsonIgnore
-//    private Set<PatientHistoryQuestions> patientHistoryQuestions = new HashSet<>();
 }
