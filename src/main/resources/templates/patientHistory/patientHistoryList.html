@@ -60,8 +60,7 @@
                                             <span th:if="${patientHistory.active == false}" class="badge bg-danger">DisActive</span>
                                         </td>
                                         <td>
-                                            <a th:href="@{/removePatientHistory/{id}(id=${patientHistory.id})}"
-                                               th:onclick="if (!(true('Are you sure about delete it?!'))) return false">
+                                            <a th:href="@{/removePatientHistory/{id}(id=${patientHistory.id})}">
                                                 <span class=" ri-delete-bin-5-fill"></span></a>
                                             <a href="" th:href="@{/updatePatientHistory?id=}+${patientHistory.id}">
                                                 <span class="ri-edit-box-line"></span></a>
