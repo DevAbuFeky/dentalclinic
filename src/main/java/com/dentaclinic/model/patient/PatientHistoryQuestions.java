@@ -6,11 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "PATIENT_HISTORY_QUESTIONS_TABLE")
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientHistoryQuestions {
@@ -25,4 +28,7 @@ public class PatientHistoryQuestions {
     private String moreQuestionsAboutSuffering; //txt Editor
     //Female Questions ... add condition if gender is female
     private String femaleQuestions; //txtEditor
+
+    @ManyToMany(mappedBy = ("patientHistoryQuestions"),fetch = FetchType.LAZY)
+    private Set<PatientHistory> patientHistory = new HashSet<>();
 }

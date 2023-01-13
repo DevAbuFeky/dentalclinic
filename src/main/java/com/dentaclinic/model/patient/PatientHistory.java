@@ -15,6 +15,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Table(name = "PATIENT_HISTORY_TABLE")
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientHistory {
@@ -36,5 +37,14 @@ public class PatientHistory {
     private String fileNumber;
     private Boolean active;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "PATIENT_HISTORY_AND_QUESTIONS_TEBLE",
+    joinColumns = {
+            @JoinColumn(name = "patient_history_id", referencedColumnName = "id")
+    },
+    inverseJoinColumns = {
+            @JoinColumn(name = "patient_questions_id", referencedColumnName = "id")
+    })
+    private Set<PatientHistoryQuestions> patientHistoryQuestions = new HashSet<>();
 
 }
